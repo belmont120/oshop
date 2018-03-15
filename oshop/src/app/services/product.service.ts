@@ -10,4 +10,16 @@ export class ProductService {
     return this.db.list('/products').push(product);
   }
 
+  getAll() {
+    return this.db.list('/products')
+      .snapshotChanges()
+      .map(actions => {
+        return actions.map(action => ({ key: action.key, ...action.payload.val()}));
+      });
+  }
+
+  get(productId) {
+    return this.db.object('/products/' + productId ).valueChanges();
+  }
+
 }
