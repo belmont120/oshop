@@ -10,6 +10,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -25,6 +26,7 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { ProductService } from './services/product.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    FormsModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([{
         path: '',
@@ -101,6 +104,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
     AdminAuthGuardService,
     UserService,
     CategoryService,
+    ProductService,
   ],
   bootstrap: [AppComponent]
 })
