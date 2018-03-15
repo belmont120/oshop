@@ -1,5 +1,9 @@
+import { UserService } from './../services/user.service';
+import { AppUser } from './../models/app-user';
+import { Observable } from 'rxjs/Observable';
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-navbar',
@@ -8,8 +12,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   isCollapsed = true;
+  appUser: AppUser;
 
-  constructor(public auth: AuthService) {
+  constructor(private auth: AuthService) {
+    auth.appUser$.subscribe(appUser => this.appUser = appUser);
   }
 
   ngOnInit() {
@@ -22,5 +28,6 @@ export class NavbarComponent implements OnInit {
   logout() {
     this.auth.logout();
   }
+
 
 }
