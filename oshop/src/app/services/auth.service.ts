@@ -2,10 +2,11 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { Injectable } from '@angular/core';
 import * as firebase from 'firebase';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs/observable';
 
 @Injectable()
 export class AuthService {
-  user$;
+  user$: Observable<firebase.User>;
 
   constructor(private afAuth: AngularFireAuth, private route: ActivatedRoute) {
     this.user$ = afAuth.authState;
