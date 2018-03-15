@@ -11,6 +11,7 @@ import { AngularFireAuthModule, AngularFireAuth } from 'angularfire2/auth';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 
 
 import { AppComponent } from './app.component';
@@ -49,6 +50,7 @@ import { ProductService } from './services/product.service';
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     FormsModule,
+    CustomFormsModule,
     NgbModule.forRoot(),
     RouterModule.forRoot([{
         path: '',
