@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  isCollapsed = true;
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  toggleIsCollapsed() {
+    this.isCollapsed = !this.isCollapsed;
   }
 
 }
