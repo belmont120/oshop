@@ -1,4 +1,4 @@
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 export class NavbarComponent implements OnInit {
   isCollapsed = true;
 
-  constructor(private afAuth: AngularFireAuth) { }
+  constructor(public auth: AuthService) {
+  }
 
   ngOnInit() {
   }
@@ -19,7 +20,7 @@ export class NavbarComponent implements OnInit {
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+    this.auth.logout();
   }
 
 }

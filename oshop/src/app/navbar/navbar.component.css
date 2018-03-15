@@ -1,6 +1,9 @@
 .dropdown-toggle {
     cursor: pointer;
 }
+.dropdown-item {
+    cursor: pointer;
+}
 
 .navbar {
     padding: 0 2rem;
