@@ -3,3 +3,7 @@ mat-card {
     margin-top: 2px;
     margin-bottom: 2px;
 }
+
+.plus-button {
+    padding-left: auto;
+}

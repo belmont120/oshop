@@ -10,7 +10,17 @@
     <p>{{ product.price | currency:'AUD':symbol }}</p>
   </mat-card-content>
   <mat-card-actions *ngIf="showActions">
-    <button mat-button color="primary" class="btn-block" (click)="addToCart(product)">Add to Cart</button>
-    <div>{{ getQuantity() }}</div>
+    <button mat-button *ngIf="getQuantity() === 0; else updateQuantity" color="primary" class="btn-block" (click)="addToCart()">Add to Cart</button>
+    <ng-template #updateQuantity>
+      <div class="row no-gutters">
+        <div class="col-2">
+          <button mat-mini-fab color="primary" (click)="removeFromCart()">-</button>
+        </div>
+        <div class="col text-center">{{ getQuantity()}} in cart</div>
+        <div class="col-2">
+          <button mat-mini-fab color="primary" class="plus-button" (click)="addToCart()">+</button>
+        </div>
+      </div>
+    </ng-template>
   </mat-card-actions>
 </mat-card>
