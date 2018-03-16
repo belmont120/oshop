@@ -1,3 +1,4 @@
+import { switchMap } from 'rxjs/operator/switchMap';
 import { Product } from './../../models/app-product';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CategoryService } from './../../services/category.service';
@@ -12,7 +13,7 @@ import 'rxjs/add/operator/take';
 })
 export class ProductFormComponent implements OnInit {
   categories$;
-  product = {};
+  product: Product;
   id;
 
   constructor(

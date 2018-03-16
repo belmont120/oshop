@@ -1,5 +1,7 @@
+import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { Injectable } from '@angular/core';
+import { Product } from '../models/app-product';
 
 @Injectable()
 export class ProductService {
@@ -18,15 +20,15 @@ export class ProductService {
       });
   }
 
-  get(productId) {
+  get(productId): Observable<Product> {
     return this.db.object('/products/' + productId ).valueChanges();
   }
 
   update(productId, product) {
-    return this.db.object('/products/' + productId).update(product);
+    return this.db.object('/products/' + productId ).update(product);
   }
 
   delete(productId) {
-    return this.db.object('/products/' + productId).remove();
+    return this.db.object('/products/' + productId ).remove();
   }
 }
