@@ -12,7 +12,6 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
-import { DataTableModule } from 'angular5-data-table';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
@@ -83,7 +82,6 @@ const materialModules = [
     BrowserAnimationsModule,
     FormsModule,
     CustomFormsModule,
-    DataTableModule,
     materialModules,
     NgbModule.forRoot(),
     RouterModule.forRoot([{
