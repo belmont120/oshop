@@ -22,7 +22,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.categories$ = this.categoryService.getCategories();
+    this.categories$ = this.categoryService.getAll();
 
     this.id = this.route.snapshot.paramMap.get('id');
     if (this.id) {
@@ -45,6 +45,10 @@ export class ProductFormComponent implements OnInit {
     }
 
     this.productService.delete(this.id);
+    this.router.navigate(['/admin/products']);
+  }
+
+  cancel() {
     this.router.navigate(['/admin/products']);
   }
 }

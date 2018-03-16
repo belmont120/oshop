@@ -42,7 +42,8 @@ import {
   MatTooltipModule,
   MatTableModule,
   MatPaginatorModule,
-  MatSortModule } from '@angular/material';
+  MatSortModule,
+  MatListModule, } from '@angular/material';
 
 const materialModules = [
   MatButtonModule,
@@ -57,6 +58,7 @@ const materialModules = [
   MatTableModule,
   MatPaginatorModule,
   MatSortModule,
+  MatListModule,
 ];
 
 @NgModule({
@@ -86,7 +88,7 @@ const materialModules = [
     NgbModule.forRoot(),
     RouterModule.forRoot([{
         path: '',
-        component: HomeComponent
+        component: ProductsComponent
       },
       {
         path: 'login',
