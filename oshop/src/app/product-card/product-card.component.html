@@ -1,3 +1,15 @@
-<p>
-  product-card works!
-</p>
+<mat-card *ngIf="product.title">
+  <mat-card-header>
+    <!-- <div mat-card-avatar class="example-header-image"></div> -->
+    <mat-card-title>{{ product.category | uppercase }}</mat-card-title>
+    <!-- <mat-card-subtitle>Category</mat-card-subtitle> -->
+  </mat-card-header>
+  <img mat-card-image *ngIf="product.imageUrl" [src]="product.imageUrl" [alt]="product.title">
+  <mat-card-content>
+    <h5>{{ product.title }}</h5>
+    <p>{{ product.price | currency:'AUD':symbol }}</p>
+  </mat-card-content>
+  <mat-card-actions *ngIf="showActions">
+    <button mat-button color="primary">Add to Cart</button>
+  </mat-card-actions>
+</mat-card>
