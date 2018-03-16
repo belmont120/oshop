@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { ProductService } from '../../services/product.service';
 import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
@@ -18,7 +19,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy, AfterViewInit 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private router: Router) {
   }
   ngOnInit() {
     // get the products from the product service and update the MatTableDataSource
@@ -41,6 +42,9 @@ export class AdminProductsComponent implements OnInit, OnDestroy, AfterViewInit 
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.dataSource.filter = filterValue;
+  }
+  addProduct() {
+    this.router.navigate(['/admin/products/new']);
   }
 }
 
