@@ -44,6 +44,8 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatListModule, } from '@angular/material';
+import { ProductFilterComponent } from './products/product-filter/product-filter.component';
+import { ProductCardComponent } from './product-card/product-card.component';
 
 const materialModules = [
   MatButtonModule,
@@ -75,6 +77,8 @@ const materialModules = [
     AdminOrdersComponent,
     LoginComponent,
     ProductFormComponent,
+    ProductFilterComponent,
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,
