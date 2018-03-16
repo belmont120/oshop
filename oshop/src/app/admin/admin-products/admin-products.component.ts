@@ -1,31 +1,46 @@
-import { Product } from './../../models/app-product';
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductService } from '../../services/product.service';
 import { Subscription } from 'rxjs/Subscription';
+import { ProductService } from '../../services/product.service';
+import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
+import { Product } from './../../models/app-product';
+import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({
   selector: 'app-admin-products',
   templateUrl: './admin-products.component.html',
   styleUrls: ['./admin-products.component.css']
 })
-export class AdminProductsComponent implements OnInit, OnDestroy {
-  products: Product[];
-  filteredProducts: Product[];
+
+export class AdminProductsComponent implements OnInit, OnDestroy, AfterViewInit {
   subscription: Subscription;
+  displayedColumns = ['title', 'price', 'key'];
+  dataSource = new MatTableDataSource();
 
-  constructor(private productService: ProductService) { }
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
-  ngOnInit() {
-    this.subscription = this.productService.getAll().subscribe(products => this.filteredProducts = this.products = products);
-    this.filteredProducts = this.products;
+  constructor(private productService: ProductService) {
   }
-
+  ngOnInit() {
+    // get the products from the product service and update the MatTableDataSource
+    this.subscription = this.productService.getAll().subscribe(products => {
+      this.dataSource.data = products;
+    });
+  }
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
-  filter(query: string) {
-    this.filteredProducts = (query) ?
-      this.products.filter(p => p.title.toLowerCase().includes(query.toLowerCase())) : this.products;
+  ngAfterViewInit() {
+    // assign paginator and sort
+    if (this.dataSource) {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    }
+  }
+  applyFilter(filterValue: string) {
+    // get filter value and apply to MatTableDataSource
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
   }
 }
+

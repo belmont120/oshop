@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { CustomFormsModule } from 'ng2-validation';
+import { DataTableModule } from 'angular5-data-table';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 
 import { AppComponent } from './app.component';
@@ -28,6 +30,35 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './services/auth.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
 import { ProductService } from './services/product.service';
+
+import {
+  MatButtonModule,
+  MatMenuModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatCardModule,
+  MatSidenavModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatTooltipModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule } from '@angular/material';
+
+const materialModules = [
+  MatButtonModule,
+  MatMenuModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatCardModule,
+  MatSidenavModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatTooltipModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+];
 
 @NgModule({
   declarations: [
@@ -49,8 +80,11 @@ import { ProductService } from './services/product.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    BrowserAnimationsModule,
     FormsModule,
     CustomFormsModule,
+    DataTableModule,
+    materialModules,
     NgbModule.forRoot(),
     RouterModule.forRoot([{
         path: '',

@@ -1,25 +1,38 @@
 <p>
   <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
 </p>
-<p>
-  <input #query (keyup)="filter(query.value)" type="text" class="form-control" placeholder="Search...">
-</p>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Price</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let p of filteredProducts">
-      <td>{{ p.title }}</td>
-      <td>{{ p.price }}</td>
-      <td>
-        <a [routerLink]="['/admin/products/', p.key]">Edit</a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="mat-elevation-z8">
+  <div class="mat-table-header">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+
+  <mat-table #table [dataSource]="dataSource" matSort>
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Title </mat-header-cell>
+      <mat-cell *matCellDef="let product"> {{product.title}} </mat-cell>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="price">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Price </mat-header-cell>
+      <mat-cell *matCellDef="let product">{{ product.price | currency:'AUD':symbol}}</mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="key">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let product">
+        <a [routerLink]="['/admin/products/', product.key]">Edit</a>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let product; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  <mat-paginator #paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
+
