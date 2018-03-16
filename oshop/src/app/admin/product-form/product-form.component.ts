@@ -1,3 +1,4 @@
+import { Product } from './../../models/app-product';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CategoryService } from './../../services/category.service';
 import { Component, OnInit } from '@angular/core';
