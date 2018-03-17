@@ -1,6 +1,7 @@
 import { ShoppingCartService } from './../services/shopping-cart.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { Product } from '../models/app-product';
+import { ShoppingCart } from '../models/app-shopping-cart';
 
 @Component({
   selector: 'app-product-card',
@@ -10,7 +11,7 @@ import { Product } from '../models/app-product';
 export class ProductCardComponent implements OnInit {
   @Input('product')product: Product;
   @Input('show-actions') showActions = true;
-  @Input('shopping-cart') shoppingCart;
+  @Input('shopping-cart') shoppingCart: ShoppingCart;
 
   constructor(private shoppingCartService: ShoppingCartService) { }
 
@@ -19,17 +20,5 @@ export class ProductCardComponent implements OnInit {
 
   addToCart() {
     this.shoppingCartService.addToCart(this.product);
-  }
-
-  removeFromCart() {
-    this.shoppingCartService.removeFromCart(this.product);
-  }
-
-  getQuantity() {
-    if (!this.shoppingCart) {
-      return 0;
-    }
-    const item = this.shoppingCart.itemsMap[this.product.key];
-    return item ? item.quantity : 0;
   }
 }
