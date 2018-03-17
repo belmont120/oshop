@@ -6,6 +6,7 @@ import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { ProductService } from '../services/product.service';
 import 'rxjs/add/operator/switchMap';
 import { ShoppingCartService } from '../services/shopping-cart.service';
+import { ShoppingCart } from '../models/app-shopping-cart';
 
 @Component({
   selector: 'app-products',
@@ -15,7 +16,7 @@ import { ShoppingCartService } from '../services/shopping-cart.service';
 export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
-  cart;
+  cart: ShoppingCart;
   category;
 
   subscription: Subscription;
@@ -39,7 +40,13 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async ngAfterViewInit() {
     this.subscription = (await this.shoppingCartService.getCart())
-      .subscribe(cart => this.cart = cart);
+      .subscribe(cart => {
+        if (!cart) {
+          cart = <ShoppingCart>{};
+        } else {
+          this.cart = cart;
+        }
+      });
   }
 
   ngOnDestroy() {
