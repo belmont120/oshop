@@ -1,3 +1,39 @@
-<p>
-  check-out works!
-</p>
+<h1>Shipping</h1>
+
+<div class="row">
+    <div class="col-md-6">
+      <form #f="ngForm" (ngSubmit)="save(f.value)">
+          <div>
+            <mat-form-field>
+              <input matInput #name="ngModel" [(ngModel)]="order.name" name="name" id="name" type="text" required minlength="3" placeholder="Name">
+            </mat-form-field>
+          </div>
+
+          <div>
+            <mat-form-field>
+              <input matInput #address="ngModel" [(ngModel)]="order.address" name="address" id="address" type="text" required placeholder="Address">
+            </mat-form-field>
+          </div>
+  
+          <div>
+            <mat-form-field>
+              <input matInput #city="ngModel" [(ngModel)]="order.city" name="city" id="city" type="text" required placeholder="City">
+            </mat-form-field>
+          </div>
+  
+          <div>
+            <mat-form-field>
+              <input matInput #postcode="ngModel" [(ngModel)]="order.postcode" name="postcode" id="postcode" type="text" required placeholder="Postcode">
+            </mat-form-field>
+          </div>
+  
+          <button mat-raised-button color="primary">Place Order</button>
+        </form>    
+    </div>
+  
+    <div class="col-md-6">
+
+    </div>
+  
+  </div>
+  
