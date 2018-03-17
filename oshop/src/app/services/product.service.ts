@@ -21,7 +21,16 @@ export class ProductService {
   }
 
   get(productId): Observable<Product> {
-    return this.db.object('/products/' + productId ).valueChanges();
+    return this.db.object('/products/' + productId )
+      .snapshotChanges()
+      .map(p => {
+        const existingProduct = new Product();
+        existingProduct.title = p.payload.val().title;
+        existingProduct.price = p.payload.val().price;
+        existingProduct.category = p.payload.val().category;
+        existingProduct.imageUrl = p.payload.val().imageUrl;
+        return existingProduct;
+      });
   }
 
   update(productId, product) {
