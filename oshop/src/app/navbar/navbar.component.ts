@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { AuthService } from './../services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { ShoppingCartService } from '../services/shopping-cart.service';
+import { ShoppingCart } from '../models/app-shopping-cart';
 
 
 @Component({
@@ -14,22 +15,14 @@ import { ShoppingCartService } from '../services/shopping-cart.service';
 export class NavbarComponent implements OnInit {
   isCollapsed = true;
   appUser: AppUser;
-  cart$;
-  shoppingCartItemCount: number;
+  cart$: Observable<ShoppingCart>;
+  // shoppingCartItemCount: number;
 
   constructor(private auth: AuthService, private shoppingCartService: ShoppingCartService) {}
 
   async ngOnInit() {
     this.auth.appUser$.subscribe(appUser => this.appUser = appUser);
-    (await this.shoppingCartService.getCart()).valueChanges()
-      .subscribe(cart => {
-        this.shoppingCartItemCount = 0;
-        for (const productId in cart.items) {
-          if (cart.items[productId]) {
-            this.shoppingCartItemCount += cart.items[productId].quantity;
-          }
-        }
-    });
+    this.cart$ = (await this.shoppingCartService.getCart());
   }
 
   toggleIsCollapsed() {

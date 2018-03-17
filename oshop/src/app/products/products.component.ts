@@ -39,7 +39,7 @@ export class ProductsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   async ngAfterViewInit() {
     this.subscription = (await this.shoppingCartService.getCart())
-      .valueChanges().subscribe(cart => this.cart = cart);
+      .subscribe(cart => this.cart = cart);
   }
 
   ngOnDestroy() {
