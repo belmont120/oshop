@@ -50,6 +50,7 @@ import {
   MatSelectModule, } from '@angular/material';
 import { ProductFilterComponent } from './products/product-filter/product-filter.component';
 import { ProductCardComponent } from './product-card/product-card.component';
+import { ProductQuantityComponent } from './product-quantity/product-quantity.component';
 
 const materialModules = [
   MatButtonModule,
@@ -86,6 +87,7 @@ const materialModules = [
     ProductFormComponent,
     ProductFilterComponent,
     ProductCardComponent,
+    ProductQuantityComponent,
   ],
   imports: [
     BrowserModule,
