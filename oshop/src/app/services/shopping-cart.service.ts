@@ -54,6 +54,9 @@ export class ShoppingCartService {
     const cartId = await this.getOrCreateCartId();
     const item$ = this.getItem(cartId, product.key);
     item$.snapshotChanges().take(1).subscribe(item => {
+      if (((item.payload.val() ? item.payload.val().quantity : 0) + change) < 0) {
+        return;
+      }
       item$.update({ product: product, quantity: (item.payload.val() ? item.payload.val().quantity : 0) + change});
     });
   }
