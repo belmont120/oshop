@@ -28,5 +28,6 @@
       </tr>
     </tfoot>
   </table>
+  <button mat-button *ngIf="cart.totalPrice > 0" (click)="clearCart()">Clear Cart</button>
 </ng-container>
 

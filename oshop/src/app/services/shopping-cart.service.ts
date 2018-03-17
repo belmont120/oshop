@@ -1,3 +1,4 @@
+import { async } from '@angular/core/testing';
 import { Observable } from 'rxjs/observable';
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireObject } from 'angularfire2/database';
@@ -28,6 +29,19 @@ export class ShoppingCartService {
       });
   }
 
+  async addToCart(product: Product) {
+    this.updateItemQuantity(product, 1);
+  }
+
+  async removeFromCart(product: Product) {
+    this.updateItemQuantity(product, -1);
+  }
+
+  async clearCart() {
+    const cartId = await this.getOrCreateCartId();
+    this.db.object('/shopping-carts/' + cartId + '/items').remove();
+  }
+
   private getItem(cartId: string, productId: string) {
     return this.db.object('/shopping-carts/' + cartId + '/items/' + productId);
   }
@@ -40,14 +54,6 @@ export class ShoppingCartService {
     const result = await this.create();
     localStorage.setItem('cartId', result.key);
     return result.key;
-  }
-
-  async addToCart(product: Product) {
-    this.updateItemQuantity(product, 1);
-  }
-
-  async removeFromCart(product: Product) {
-    this.updateItemQuantity(product, -1);
   }
 
   private async updateItemQuantity(product: Product, change: number) {
