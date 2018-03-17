@@ -1,3 +1,5 @@
+import { AuthService } from './../services/auth.service';
+import { AppUser } from './../models/app-user';
 import { Subscription } from 'rxjs/Subscription';
 import { ShoppingCart } from './../models/app-shopping-cart';
 import { async } from '@angular/core/testing';
@@ -16,29 +18,44 @@ export class CheckOutComponent implements OnInit, OnDestroy {
 
   order: Order = <Order>{};
   cart: ShoppingCart;
-  subscription: Subscription;
+  appUser: AppUser;
+  subscriptions: Subscription[] = [];
 
   constructor(
     private router: Router,
     private orderService: OrderService,
-    private shoppingCartService: ShoppingCartService) {
+    private shoppingCartService: ShoppingCartService,
+    private authService: AuthService) {
   }
 
-  async ngOnInit() {
+  private async getCart() {
     const cart$ = await this.shoppingCartService.getCart();
-    this.subscription = cart$.subscribe(cart => this.cart = cart);
+    this.subscriptions.push(cart$.subscribe(cart => this.cart = cart));
+  }
+
+  private getAppUser() {
+    const appUser$ = this.authService.appUser$;
+    this.subscriptions.push(appUser$.subscribe(user => this.appUser = user));
+  }
+
+  ngOnInit() {
+    this.getCart();
+    this.getAppUser();
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    for (let i = 0; i < this.subscriptions.length; i++) {
+      this.subscriptions[i].unsubscribe();
+    }
   }
 
-  save(order) {
+  async placeOrder(order) {
     order.datePlaced = new Date().getTime();
     order.cart = this.cart;
-    console.log(order);
-    // this.orderService.create(order);
+    order.appUser = this.appUser;
 
-    // this.router.navigate(['/admin/products']);
+    const result = await this.orderService.placeOrder(order);
+
+    this.router.navigate(['/order-success', result.key]);
   }
 }

@@ -1,0 +1,10 @@
+mat-card-title {
+    font-size: 4em;
+}
+
+.thumbnail {
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    border-radius: 50%;
+}

@@ -29,6 +29,11 @@ export class ShoppingCartService {
       });
   }
 
+  resetCart() {
+    localStorage.removeItem('cartId');
+    this.getOrCreateCartId();
+  }
+
   async addToCart(product: Product) {
     this.updateItemQuantity(product, 1);
   }
