@@ -14,7 +14,7 @@ import { Order } from '../models/app-order';
 })
 export class OrderFormComponent implements OnInit {
   order: Order = <Order>{};
-  appUser: AppUser;
+  userId: string;
   subscription: Subscription;
   @Input('cart') cart: ShoppingCart;
 
@@ -29,14 +29,14 @@ export class OrderFormComponent implements OnInit {
   }
 
   private getAppUser() {
-    const appUser$ = this.authService.appUser$;
-    this.subscription = appUser$.subscribe(user => this.appUser = user);
+    const user$ = this.authService.user$;
+    this.subscription = user$.subscribe(user => this.userId = user.uid);
   }
 
   async placeOrder(order) {
     order.datePlaced = new Date().getTime();
     order.cart = this.cart;
-    order.appUser = this.appUser;
+    order.userId = this.userId;
 
     const result = await this.orderService.placeOrder(order);
 
