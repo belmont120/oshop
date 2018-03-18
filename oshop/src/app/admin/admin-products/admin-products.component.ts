@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { ProductService } from '../../services/product.service';
+import { ProductService } from '../../shared/services/product.service';
 import { Component, OnInit, OnDestroy, ViewChild, AfterViewInit } from '@angular/core';
-import { Product } from './../../models/app-product';
+import { Product } from '../../shared/models/app-product';
 import { MatPaginator, MatTableDataSource, MatSort } from '@angular/material';
 
 @Component({

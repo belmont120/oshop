@@ -1,10 +1,10 @@
-import { AuthService } from './../services/auth.service';
+import { AuthService } from '../shared/services/auth.service';
 import { Observable } from 'rxjs/observable';
 import { Component, OnInit, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { Subscription } from 'rxjs/Subscription';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
-import { OrderService } from '../services/order.service';
-import { Order } from '../models/app-order';
+import { OrderService } from '../shared/services/order.service';
+import { Order } from '../shared/models/app-order';
 
 @Component({
   selector: 'app-my-orders',

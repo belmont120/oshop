@@ -1,8 +1,8 @@
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/observable';
 import { Component, OnInit } from '@angular/core';
-import { ShoppingCartService } from '../services/shopping-cart.service';
-import { ShoppingCart } from '../models/app-shopping-cart';
+import { ShoppingCartService } from '../shared/services/shopping-cart.service';
+import { ShoppingCart } from '../shared/models/app-shopping-cart';
 
 @Component({
   selector: 'app-shopping-cart',

@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs/Subscription';
-import { ShoppingCart } from './../models/app-shopping-cart';
+import { ShoppingCart } from '../shared/models/app-shopping-cart';
 import { async } from '@angular/core/testing';
-import { ShoppingCartService } from './../services/shopping-cart.service';
+import { ShoppingCartService } from '../shared/services/shopping-cart.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 
