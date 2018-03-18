@@ -25,6 +25,7 @@ import {
   MatToolbarModule,
   MatTooltipModule,
 } from '@angular/material';
+import { AuthGuardService } from 'shared/services/auth-guard.service';
 const materialModules = [
   MatButtonModule,
   MatMenuModule,
@@ -48,9 +49,30 @@ const materialModules = [
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule,
     SharedModule,
     materialModules,
+    RouterModule.forChild([
+      {
+        path: 'admin/products/new',
+        component: ProductFormComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService]
+      },
+      {
+        path: 'admin/products/:id',
+        component: ProductFormComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService]
+      },
+      {
+        path: 'admin/products',
+        component: AdminProductsComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService]
+      },
+      {
+        path: 'admin/orders',
+        component: AdminOrdersComponent,
+        canActivate: [AuthGuardService, AdminAuthGuardService]
+      },
+    ]),
   ],
   declarations: [
     AdminProductsComponent,
